@@ -2,25 +2,26 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 [RequireComponent(typeof(Rigidbody2D))]
 [RequireComponent(typeof(BoxCollider2D))]
 public class Walker : MonoBehaviour
 {
+
     [SerializeField]
-    private float _moveSpeed = 10;
+    private WalkerStats _stats;
 
     /// <summary>
     /// Right Point
     /// </summary>
-    public GameObject pointA;
+    [SerializeField]
+    private Transform _pointA;
     /// <summary>
     /// Left Point
     /// </summary>
-    public GameObject pointB;
-
-
-
+    [SerializeField]
+    private Transform _pointB;
     private Transform _currentPoint;
     private Rigidbody2D _rigidbody;
 
@@ -33,20 +34,16 @@ public class Walker : MonoBehaviour
     private float _walkerWidthHalved;
 
 
-
-
     // Start is called before the first frame update
     void Start()
     {
         _rigidbody = GetComponent<Rigidbody2D>();
 
-        if (!pointA || !pointB)
+        if (!_pointA || !_pointB)
             return;
 
-        _currentPoint = pointB.transform;
+        _currentPoint = _pointB;
         _walkerWidthHalved = GetComponent<BoxCollider2D>().size.x;
-        
-
     }
 
 
@@ -64,27 +61,24 @@ public class Walker : MonoBehaviour
     void Update()
     {
 
-        if (!pointA || !pointB)
+        if (!_pointA || !_pointB)
             return;
 
         if (!IsGrounded())
             return;
 
-        Vector2 toGoPoint = _currentPoint.position - transform.position;
 
-        _rigidbody.velocity = new Vector2(_moveSpeed * _moveSign, 0);
+        _rigidbody.velocity = new Vector2(_stats.moveSpeed * _moveSign, 0);
 
-
-
-        if (Math.Abs(transform.position.x - _currentPoint.position.x) < _walkerWidthHalved && _currentPoint == pointA.transform)
+        if (Math.Abs(transform.position.x - _currentPoint.position.x) < _walkerWidthHalved && _currentPoint == _pointA)
         {
-            _currentPoint = pointB.transform;
+            _currentPoint = _pointB;
             _moveSign *= -1;
         }
 
-        if (Math.Abs(transform.position.x - _currentPoint.position.x) < _walkerWidthHalved && _currentPoint == pointB.transform)
+        if (Math.Abs(transform.position.x - _currentPoint.position.x) < _walkerWidthHalved && _currentPoint == _pointB)
         {
-            _currentPoint = pointA.transform;
+            _currentPoint = _pointA;
             _moveSign *= -1;
         }
 
