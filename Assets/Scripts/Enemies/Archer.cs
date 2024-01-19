@@ -15,10 +15,10 @@ public class Archer : MonoBehaviour
     private float _timestep = 0.1f;
 
     [SerializeField]
-    private float _shootCooldown = 0.5f;
-    [SerializeField]
-    private float _midwayPointOffset = 30;
+    private float _shootCooldown = 0f;
 
+    [SerializeField]
+    private ArcherStats _stats;
 
 
 
@@ -34,13 +34,13 @@ public class Archer : MonoBehaviour
     {
         _shootCooldown += Time.deltaTime;
 
-        if (_shootCooldown < 2f)
+        if (_shootCooldown < _stats.maxShootCooldown)
             return;
 
-        _shootCooldown -= 2f;
+        _shootCooldown -= _stats.maxShootCooldown;
 
         Vector3 midwayPoint = Vector3.Lerp(transform.position, ArrowLandLocation.position, 0.5f);
-        midwayPoint.y += _midwayPointOffset;
+        midwayPoint.y += _stats.midwayPointOffset;
 
         StartCoroutine(ArrowManager.instance.ShootArrow(transform.position, midwayPoint, ArrowLandLocation.position));
     }
@@ -66,7 +66,7 @@ public class Archer : MonoBehaviour
         Vector3 CurrentP;
 
         Vector3 midwayPoint = Vector3.Lerp(transform.position, ArrowLandLocation.position, 0.5f);
-        midwayPoint.y += _midwayPointOffset;
+        midwayPoint.y += _stats.midwayPointOffset;
 
         for (float t = 0; t <= 1; t += _timestep)
         {

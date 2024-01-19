@@ -178,4 +178,4 @@ MonoBehaviour:
   ArrowLandLocation: {fileID: 1221116234601974245}
   _timestep: 0.001
   _shootCooldown: 0.5
-  _midwayPointOffset: 40
+  _stats: {fileID: 11400000, guid: a2dac123632067245ae65dc94ba886c0, type: 2}
