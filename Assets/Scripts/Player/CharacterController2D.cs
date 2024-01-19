@@ -16,8 +16,8 @@ public class CharacterController2D : MonoBehaviour
 	private bool m_FacingRight = true;  // For determining which way the player is currently facing.
 	private Vector3 m_Velocity = Vector3.zero;
 
-	const float _JumpDelay = 0.1f;
-	private float _JumpTimer;
+	private float _jumpTimer;
+	[SerializeField] private float _jumpDelay = 0.1f;
 
 	[Header("Events")]
 	[Space]
@@ -36,7 +36,6 @@ public class CharacterController2D : MonoBehaviour
 	{
 		bool wasGrounded = m_Grounded;
 		m_Grounded = false;
-		_JumpTimer += Time.fixedDeltaTime;
 
 		// The player is grounded if a circlecast to the groundcheck position hits anything designated as ground
 		// This can be done using layers instead but Sample Assets will not overwrite your project settings.
@@ -55,8 +54,11 @@ public class CharacterController2D : MonoBehaviour
 
 	public void Move(float move, bool crouch, bool jump)
 	{
-		//only control the player if grounded or airControl is turned on
-		if (m_Grounded || m_AirControl)
+		if(m_Grounded)
+            _jumpTimer += Time.deltaTime;
+
+        //only control the player if grounded or airControl is turned on
+        if (m_Grounded || m_AirControl)
 		{
 
 			// Move the character by finding the target velocity
@@ -78,12 +80,12 @@ public class CharacterController2D : MonoBehaviour
 			}
 		}
 		// If the player should jump...
-		if (m_Grounded && jump && _JumpDelay < _JumpTimer)
+		if (m_Grounded && jump && _jumpDelay < _jumpTimer)
 		{
 			// Add a vertical force to the player.
 			m_Grounded = false;
 			m_Rigidbody2D.AddForce(new Vector2(0f, m_JumpForce));
-			_JumpTimer = 0f;
+			_jumpTimer = 0f;
         }
 	}
 

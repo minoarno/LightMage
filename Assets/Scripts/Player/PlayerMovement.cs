@@ -2,24 +2,25 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-    [SerializeField] CharacterController2D characterController;
-    [SerializeField] private float _MovementSpeed = 40f;
+    [SerializeField] CharacterController2D _characterController;
+    [SerializeField] PlayerData _playerData;
 
-    private float _HorizontalMovement = 0f;
-    private bool _IsJumping = false;
+    private float _horizontalMovement = 0f;
+    private bool _isJumping = false;
 
     // Update is called once per frame
     void Update()
     {
-        _HorizontalMovement = Input.GetAxisRaw("Horizontal") * _MovementSpeed * Time.deltaTime;
+        
+        _horizontalMovement = Input.GetAxisRaw("Horizontal") * _playerData._movementSpeed * Time.deltaTime;
 
         if (Input.GetButtonDown("Jump"))
-            _IsJumping = true;
+            _isJumping = true;
     }
 
     private void FixedUpdate()
     {
-        characterController.Move(_HorizontalMovement, false, _IsJumping);
-        _IsJumping = false;
+        _characterController.Move(_horizontalMovement, false, _isJumping);
+        _isJumping = false;
     }
 }
