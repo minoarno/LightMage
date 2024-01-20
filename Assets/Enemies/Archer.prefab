@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1221116234601974245}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: ArrowLandPosition
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -43,7 +43,7 @@ GameObject:
   - component: {fileID: 5672469362013480012}
   - component: {fileID: 789766785666782368}
   - component: {fileID: 6802560724041448982}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Archer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -175,7 +175,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e8b6aa61c9f363e40a09671353c9f325, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ArrowLandLocation: {fileID: 1221116234601974245}
   _timestep: 0.001
   _shootCooldown: 0.5
   _stats: {fileID: 11400000, guid: a2dac123632067245ae65dc94ba886c0, type: 2}
