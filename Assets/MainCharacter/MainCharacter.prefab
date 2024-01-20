@@ -97,8 +97,8 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 9.78}
-  m_Size: {x: 7.56, y: 19.2}
+  m_Offset: {x: 0.18, y: 8}
+  m_Size: {x: 6.99, y: 16.38}
   m_Direction: 0
 --- !u!114 &6563949877733705635
 MonoBehaviour:
@@ -131,7 +131,7 @@ MonoBehaviour:
   m_AirControl: 1
   m_WhatIsGround:
     serializedVersion: 2
-    m_Bits: 23
+    m_Bits: 64
   m_GroundCheck: {fileID: 6188977977730743194}
   m_CeilingCheck: {fileID: 8875673366319325895}
   _jumpDelay: 0.2
@@ -226,8 +226,8 @@ Transform:
   m_GameObject: {fileID: 8622618737736665893}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 9.7, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 0, y: 8.75, z: 0}
+  m_LocalScale: {x: 8.576555, y: 8.576555, z: 8.576555}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 5292746378872063741}
