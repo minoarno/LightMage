@@ -18,8 +18,6 @@ public class Flyer : MonoBehaviour
     //[SerializeField]
     //private Transform _target { get; set; }
 
-    private bool _isMovingToWaypoint = false;
-
     private Transform _currentWaypoint;
     private Rigidbody2D _rigidbody;
 

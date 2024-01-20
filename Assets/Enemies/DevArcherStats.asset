@@ -15,4 +15,4 @@ MonoBehaviour:
   maxDamage: 2
   maxHealth: 5
   maxShootCooldown: 2
-  midwayPointOffset: 30
+  midwayPointOffset: 5
