@@ -4,20 +4,29 @@ using UnityEngine;
 
 public class FlyerWaypoints : MonoBehaviour
 {
-    [Min(2)]
+    [Range(0.001f, 10)]
     [SerializeField] private float waypointSize = 2;
 
+    private int _curWaypoint = 0;
 
 
-    private void OnDrawGizmos()
+    private void OnDrawGizmosSelected()
     {
         if (transform.childCount == 0)
             return;
 
-        foreach (Transform t in transform)
+
+        for (int i = 0; i < transform.childCount; i++)
         {
+            if(i == _curWaypoint)
+            {
+                Gizmos.color = Color.green;
+                Gizmos.DrawWireSphere(transform.GetChild(i).position, waypointSize);
+                continue;
+            }
+
             Gizmos.color = Color.blue;
-            Gizmos.DrawWireSphere(t.position, waypointSize);
+            Gizmos.DrawWireSphere(transform.GetChild(i).position, waypointSize);
         }
 
         Gizmos.color = Color.red;
@@ -34,15 +43,22 @@ public class FlyerWaypoints : MonoBehaviour
     public Transform GetNextWayPoint(Transform currentWaypoint)
     {
         if (currentWaypoint == null)
+        {
+            _curWaypoint = 0;
             return transform.GetChild(0);
+        }
 
 
         if (currentWaypoint.GetSiblingIndex() < transform.childCount - 1)
+        {
+            _curWaypoint = currentWaypoint.GetSiblingIndex() + 1;
             return transform.GetChild(currentWaypoint.GetSiblingIndex() + 1);
-
-
+        }
         else
+        {
+            _curWaypoint = 0;
             return transform.GetChild(0);
+        }
 
     }
 }

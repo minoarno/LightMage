@@ -1,14 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Net;
 using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
 
 public class Archer : MonoBehaviour
 {
-
-    [SerializeField]
-    Transform ArrowLandLocation;
 
     [SerializeField]
     [Range(0.001f, 1)]
@@ -19,7 +17,6 @@ public class Archer : MonoBehaviour
 
     [SerializeField]
     private ArcherStats _stats;
-
 
 
 
@@ -39,20 +36,42 @@ public class Archer : MonoBehaviour
 
         _shootCooldown -= _stats.maxShootCooldown;
 
-        Vector3 midwayPoint = Vector3.Lerp(transform.position, ArrowLandLocation.position, 0.5f);
-        midwayPoint.y += _stats.midwayPointOffset;
+        Vector3 playerPos = PlayerManager.instance.GetPlayerTransform().position;
+        Vector3 midwayPoint, endPoint;
+        CalculateMidwayPoint(playerPos, out midwayPoint, out endPoint);
 
-        StartCoroutine(ArrowManager.instance.ShootArrow(transform.position, midwayPoint, ArrowLandLocation.position));
+        StartCoroutine(ArrowManager.instance.ShootArrow(transform.position, midwayPoint, endPoint));
+    }
+
+    private void CalculateMidwayPoint(Vector3 playerPos, out Vector3 midwayPoint, out Vector3 endPoint)
+    {
+
+        RaycastHit2D hit = Physics2D.Raycast(playerPos, Vector2.down);
+
+
+        if (hit.collider != null)
+        {
+
+            endPoint = hit.point;
+        }
+        else
+        {
+            endPoint = playerPos;
+        }
+
+
+        midwayPoint = Vector3.Lerp(transform.position, playerPos, 0.5f);
+        midwayPoint.y = playerPos.y + _stats.midwayPointOffset;
     }
 
     private void OnDrawGizmos()
     {
-        if (!ArrowLandLocation)
+        if (!PlayerManager.instance)
             return;
 
         Gizmos.color = Color.green;
-        Gizmos.DrawWireSphere(transform.position, 1);
-        Gizmos.DrawWireSphere(ArrowLandLocation.position, 1);
+        Gizmos.DrawWireSphere(transform.position, 0.2f);
+        Gizmos.DrawWireSphere(PlayerManager.instance.GetPlayerTransform().position, 0.2f);
 
         DrawArc();
 
@@ -60,26 +79,27 @@ public class Archer : MonoBehaviour
 
     private void DrawArc()
     {
-        Vector3 PreviousP = transform.position;
-        Vector3 PointA;
-        Vector3 PointB;
-        Vector3 CurrentP;
+        Vector3 previousP = transform.position;
+        Vector3 pointA;
+        Vector3 pointB;
+        Vector3 currentP;
 
-        Vector3 midwayPoint = Vector3.Lerp(transform.position, ArrowLandLocation.position, 0.5f);
-        midwayPoint.y += _stats.midwayPointOffset;
+        Vector3 playerPos = PlayerManager.instance.GetPlayerTransform().position;
+        Vector3 midwayPoint, endPoint;
+        CalculateMidwayPoint(playerPos, out midwayPoint, out endPoint);
 
         for (float t = 0; t <= 1; t += _timestep)
         {
 
-            PointA = Vector3.Lerp(transform.position, midwayPoint, t);
-            PointB = Vector3.Lerp(midwayPoint, ArrowLandLocation.position, t);
-            CurrentP = Vector3.Lerp(PointA, PointB, t);
+            pointA = Vector3.Lerp(transform.position, midwayPoint, t);
+            pointB = Vector3.Lerp(midwayPoint, endPoint, t);
+            currentP = Vector3.Lerp(pointA, pointB, t);
 
-            Gizmos.DrawLine(PreviousP, CurrentP);
-            PreviousP = CurrentP;
+            Gizmos.DrawLine(previousP, currentP);
+            previousP = currentP;
         }
 
-        Gizmos.DrawLine(PreviousP, ArrowLandLocation.position);
+        Gizmos.DrawLine(previousP, endPoint);
     }
 
 }
