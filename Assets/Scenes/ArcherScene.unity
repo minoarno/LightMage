@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
+  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -366,6 +366,32 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1198645201 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6367975338362091535, guid: 0f20d23a1a2361148b8f749f9bef006f, type: 3}
+  m_PrefabInstance: {fileID: 2938660950793593298}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &1198645206
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1198645201}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 0db1718b6f9628e4198906cc2f3dcead, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1001 &1284513246
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -490,11 +516,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2657288259863667560, guid: 0f20d23a1a2361148b8f749f9bef006f, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -64.651085
+      value: -59.2
       objectReference: {fileID: 0}
     - target: {fileID: 2657288259863667560, guid: 0f20d23a1a2361148b8f749f9bef006f, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -6.980526
+      value: 1.1
       objectReference: {fileID: 0}
     - target: {fileID: 2657288259863667560, guid: 0f20d23a1a2361148b8f749f9bef006f, type: 3}
       propertyPath: m_LocalPosition.z
@@ -535,7 +561,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 6367975338362091535, guid: 0f20d23a1a2361148b8f749f9bef006f, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1198645206}
   m_SourcePrefab: {fileID: 100100000, guid: 0f20d23a1a2361148b8f749f9bef006f, type: 3}
 --- !u!1001 &3024887917628235696
 PrefabInstance:
