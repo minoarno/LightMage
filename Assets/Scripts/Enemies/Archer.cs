@@ -46,7 +46,7 @@ public class Archer : MonoBehaviour
     private void CalculateMidwayPoint(Vector3 playerPos, out Vector3 midwayPoint, out Vector3 endPoint)
     {
 
-        RaycastHit2D hit = Physics2D.Raycast(playerPos, Vector2.down);
+        RaycastHit2D hit = Physics2D.Raycast(playerPos, Vector2.down, float.MaxValue, ~LayerMask.GetMask("Player"));
 
 
         if (hit.collider != null)
