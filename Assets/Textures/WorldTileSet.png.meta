@@ -500,6 +500,48 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
+    - serializedVersion: 2
+      name: WorldTileSet_18
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 64
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c19aae6c661573743aee52e5f9f6e6a4
+      internalID: 698327730
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WorldTileSet_19
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 64
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 54917300575b44940a863eaa9c38bcce
+      internalID: -471935299
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
@@ -521,6 +563,8 @@ TextureImporter:
       WorldTileSet_15: 1456224479
       WorldTileSet_16: 697823412
       WorldTileSet_17: 646600591
+      WorldTileSet_18: 698327730
+      WorldTileSet_19: -471935299
       WorldTileSet_2: -99257405
       WorldTileSet_3: 623134909
       WorldTileSet_4: 662767441
