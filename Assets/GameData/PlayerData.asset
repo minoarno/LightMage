@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: PlayerData
   m_EditorClassIdentifier: 
   _maxHealth: 10
-  _movementSpeed: 750
+  _movementSpeed: 900
   _fireBallCooldown: 0.5
