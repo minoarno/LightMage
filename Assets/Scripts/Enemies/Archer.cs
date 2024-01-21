@@ -36,7 +36,7 @@ public class Archer : MonoBehaviour, IEnemy
         Vector3 midwayPoint, endPoint;
         CalculateMidwayPoint(playerPos, out midwayPoint, out endPoint);
 
-        StartCoroutine(ArrowManager.instance.ShootArrow(transform.position, midwayPoint, endPoint));
+       ArrowManager.instance.StartShootArrow(transform.position, midwayPoint, endPoint);
     }
 
     private void CalculateMidwayPoint(Vector3 playerPos, out Vector3 midwayPoint, out Vector3 endPoint)
@@ -46,15 +46,9 @@ public class Archer : MonoBehaviour, IEnemy
 
 
         if (hit.collider != null)
-        {
-
             endPoint = hit.point;
-        }
         else
-        {
             endPoint = playerPos;
-        }
-
 
         midwayPoint = Vector3.Lerp(transform.position, playerPos, 0.5f);
         midwayPoint.y = playerPos.y + _stats.midwayPointOffset;
