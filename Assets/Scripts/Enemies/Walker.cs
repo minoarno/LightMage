@@ -3,21 +3,19 @@ using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D))]
 [RequireComponent(typeof(BoxCollider2D))]
+[RequireComponent(typeof(SpriteRenderer))]
 public class Walker : MonoBehaviour, IEnemy
 {
     [SerializeField]
     private WalkerStats _stats;
 
-    /// <summary>
-    /// Right Point
-    /// </summary>
     [SerializeField]
     private Transform _pointA;
-    /// <summary>
-    /// Left Point
-    /// </summary>
     [SerializeField]
     private Transform _pointB;
+
+    [SerializeField]
+    private SpriteRenderer _spriteRender;
     private Transform _currentPoint;
     private Rigidbody2D _rigidbody;
 
@@ -39,6 +37,12 @@ public class Walker : MonoBehaviour, IEnemy
         if (!_pointA || !_pointB)
             return;
 
+
+        if (_pointB.position.x < _pointA.position.x)
+            _spriteRender.flipX = false;
+        else
+            _spriteRender.flipX = true;
+
         _currentPoint = _pointB;
         _walkerWidthHalved = GetComponent<BoxCollider2D>().size.x;
     }
@@ -46,7 +50,22 @@ public class Walker : MonoBehaviour, IEnemy
 
     private void OnDrawGizmosSelected()
     {
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(_pointA.position, 0.5f);
+        Gizmos.DrawWireSphere(_pointB.position, 0.5f);
 
+
+
+
+        if (!_currentPoint)
+            return;
+        Gizmos.color = Color.green;
+        Gizmos.DrawWireSphere(_currentPoint.position, 0.5f);
+
+        if (!_rigidbody)
+            return;
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawLine(transform.position, transform.position + new Vector3(_rigidbody.velocity.x, _rigidbody.velocity.y));
     }
 
     bool IsGrounded()
@@ -65,18 +84,24 @@ public class Walker : MonoBehaviour, IEnemy
             return;
 
 
-        _rigidbody.velocity = new Vector2(_stats.moveSpeed * _moveSign, 0);
+        _rigidbody.velocity = (_currentPoint.position - transform.position) * _stats.moveSpeed;
+        //ignore y
+        _rigidbody.velocity *= Vector2.right;
+        //normalize to keep consistant
+        _rigidbody.velocity = _rigidbody.velocity.normalized;
 
-        if (Math.Abs(transform.position.x - _currentPoint.position.x) <  _stats.maxWayPointDistance && _currentPoint == _pointA)
+        if (Math.Abs(transform.position.x - _currentPoint.position.x) < _stats.maxWayPointDistance && _currentPoint == _pointA)
         {
             _currentPoint = _pointB;
             _moveSign *= -1;
+            _spriteRender.flipX = !_spriteRender.flipX;
         }
 
         if (Math.Abs(transform.position.x - _currentPoint.position.x) < _stats.maxWayPointDistance && _currentPoint == _pointB)
         {
             _currentPoint = _pointA;
             _moveSign *= -1;
+            _spriteRender.flipX = !_spriteRender.flipX;
         }
 
     }
