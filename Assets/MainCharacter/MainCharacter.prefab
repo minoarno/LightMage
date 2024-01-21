@@ -129,8 +129,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d99b306f984df5b4891d35ca52257e88, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_JumpForce: 250
-  m_MovementSmoothing: 0
+  m_JumpForce: 500
   m_AirControl: 1
   m_WhatIsGround:
     serializedVersion: 2
@@ -170,6 +169,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _playerData: {fileID: 11400000, guid: 4f719cb28f4f2fe40ba461c3d9bbe2ab, type: 2}
+  _healthBar: {fileID: 0}
 --- !u!1 &2856256702066894250
 GameObject:
   m_ObjectHideFlags: 0
