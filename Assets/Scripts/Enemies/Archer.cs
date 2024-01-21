@@ -15,15 +15,30 @@ public class Archer : MonoBehaviour, IEnemy
 
     int _currentHealth;
 
+    private LayerMask _toHitLayerMask;
+
+    private Vector3 _shootTarget;
+    private Vector3 _shootRaycastDir;
+
     // Start is called before the first frame update
     void Start()
     {
         _currentHealth = _stats.maxHealth;
+
+        _toHitLayerMask = LayerMask.GetMask("Player", "Terrain");
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (!PlayerManager.instance || !PlayerManager.instance.GetPlayerTransform())
+            return;
+
+        Vector3 playerPos = PlayerManager.instance.GetPlayerTransform().position;
+
+        if (Vector3.Distance(transform.position, playerPos) > _stats.awakeDistance)
+            return;
+
         _shootCooldown += Time.deltaTime;
 
         if (_shootCooldown < _stats.maxShootCooldown)
@@ -31,12 +46,22 @@ public class Archer : MonoBehaviour, IEnemy
 
         _shootCooldown -= _stats.maxShootCooldown;
 
+        _shootRaycastDir = playerPos - transform.position;
 
-        Vector3 playerPos = PlayerManager.instance.GetPlayerTransform().position;
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, _shootRaycastDir, float.MaxValue, _toHitLayerMask);
+
+        if (!hit)
+            return;
+
+        int bitshiftedMask = LayerMask.GetMask("Player") >> hit.collider.gameObject.layer;
+
+        if (bitshiftedMask != 1)
+            return;
+
         Vector3 midwayPoint, endPoint;
         CalculateMidwayPoint(playerPos, out midwayPoint, out endPoint);
 
-       ArrowManager.instance.StartShootArrow(transform.position, midwayPoint, endPoint);
+        ArrowManager.instance.StartShootArrow(transform.position, midwayPoint, endPoint);
     }
 
     private void CalculateMidwayPoint(Vector3 playerPos, out Vector3 midwayPoint, out Vector3 endPoint)
@@ -56,14 +81,26 @@ public class Archer : MonoBehaviour, IEnemy
 
     private void OnDrawGizmos()
     {
+
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(transform.position, _stats.awakeDistance);
+
         if (!PlayerManager.instance)
             return;
+
+
+        Gizmos.DrawLine(transform.position, transform.position + _shootRaycastDir);
+
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(_shootTarget, 1);
 
         Gizmos.color = Color.green;
         Gizmos.DrawWireSphere(transform.position, 0.2f);
         Gizmos.DrawWireSphere(PlayerManager.instance.GetPlayerTransform().position, 0.2f);
 
+
         DrawArc();
+
 
     }
 

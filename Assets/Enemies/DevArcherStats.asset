@@ -16,3 +16,4 @@ MonoBehaviour:
   maxHealth: 5
   maxShootCooldown: 2
   midwayPointOffset: 5
+  awakeDistance: 8
