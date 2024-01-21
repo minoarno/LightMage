@@ -48,4 +48,10 @@ public class FireBall : MonoBehaviour
             enemy.DoDamage(_spellData._damage);
     }
 
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawLine(transform.position, new Vector2(transform.position.x, transform.position.y) + _rigidBody.velocity);
+    }
+
 }

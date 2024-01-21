@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.Tilemaps;
 
 public class PlayerAttack : MonoBehaviour
 {
@@ -25,7 +24,7 @@ public class PlayerAttack : MonoBehaviour
         _currentCooldown = 0;
         Vector3 mouseInput = new Vector3(Input.mousePosition.x, Input.mousePosition.y, _camera.nearClipPlane);
         mousePosition = _camera.ScreenToWorldPoint(mouseInput);
-
+        mousePosition.z = 0;
         SpawnFireBall();
     }
 
@@ -33,17 +32,18 @@ public class PlayerAttack : MonoBehaviour
     {
         GameObject fireBall = Instantiate(_fireBallPrefab);
 
-        fireBall.transform.position = _attackPosition.position;
-        
-        //float angleDiff = Vector3.Dot(fireBall.transform.position, mousePosition);
-        //fireBall.transform.GetChild(0).LookAt(_attackPosition.position + (mousePosition));
-        //fireBall.transform.Rotate(0, 0, angleDiff + 45);
+
+        Transform fireballTransform = fireBall.transform;
+        fireballTransform.position = _attackPosition.position;
+
+        fireballTransform.LookAt(_attackPosition.position + (mousePosition - _attackPosition.position));
+        fireballTransform.Rotate(0, -90, 0);
 
         fireBall.GetComponent<FireBall>().SetTargetPosition(_attackPosition.position, mousePosition);
     }
 
-   // private void OnDrawGizmos()
-   // {
-   //     Gizmos.DrawLine(_attackPosition.position, mousePosition);
-   // }
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.DrawLine(_attackPosition.position, mousePosition);
+    }
 }
