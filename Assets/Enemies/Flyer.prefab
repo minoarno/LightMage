@@ -242,7 +242,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 94eda01698371ed409b743d0c00ccc71, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _stats: {fileID: 0}
+  _stats: {fileID: 11400000, guid: af0ba21380ad59740be164530c297426, type: 2}
   _waypoints: {fileID: 4513432441883957649}
 --- !u!111 &3361926201695888952
 Animation:

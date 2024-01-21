@@ -34,14 +34,16 @@ public class Archer : MonoBehaviour, IEnemy
         if (!PlayerManager.instance || !PlayerManager.instance.GetPlayerTransform())
             return;
 
-        Vector3 playerPos = PlayerManager.instance.GetPlayerTransform().position;
-
-        if (Vector3.Distance(transform.position, playerPos) > _stats.awakeDistance)
-            return;
 
         _shootCooldown += Time.deltaTime;
 
         if (_shootCooldown < _stats.maxShootCooldown)
+            return;
+
+
+        Vector3 playerPos = PlayerManager.instance.GetPlayerTransform().position;
+
+        if (Vector3.Distance(transform.position, playerPos) > _stats.awakeDistance)
             return;
 
         _shootCooldown -= _stats.maxShootCooldown;
