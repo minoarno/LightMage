@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class DisableExit : MonoBehaviour
 {
-    [SerializeField] Button _finalButton;
+    [SerializeField] Crystal _finalButton;
 
     private bool _isGone = false;
     private void Update()

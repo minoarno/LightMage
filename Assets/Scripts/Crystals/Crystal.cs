@@ -2,17 +2,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Button : MonoBehaviour
+public class Crystal : MonoBehaviour
 {
 
     [SerializeField]
     private Sprite _onSprite;
 
     [SerializeField]
-    private Button _previousButton;
+    private Crystal _previousButton;
 
     [SerializeField]
-    private Button _nextButton;
+    private Crystal _nextButton;
 
     private SpriteRenderer _crystalRenderer;
 

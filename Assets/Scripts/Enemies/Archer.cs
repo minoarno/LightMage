@@ -87,7 +87,8 @@ public class Archer : MonoBehaviour, IEnemy
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, _stats.awakeDistance);
 
-        if (!PlayerManager.instance)
+
+        if (!PlayerManager.instance || !PlayerManager.instance.GetPlayerTransform())
             return;
 
 
@@ -98,6 +99,7 @@ public class Archer : MonoBehaviour, IEnemy
 
         Gizmos.color = Color.green;
         Gizmos.DrawWireSphere(transform.position, 0.2f);
+
         Gizmos.DrawWireSphere(PlayerManager.instance.GetPlayerTransform().position, 0.2f);
 
 

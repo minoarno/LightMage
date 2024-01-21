@@ -43,7 +43,7 @@ GameObject:
   - component: {fileID: 7963360008923765353}
   - component: {fileID: 1639004000068067972}
   m_Layer: 10
-  m_Name: Button
+  m_Name: Crystal
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
