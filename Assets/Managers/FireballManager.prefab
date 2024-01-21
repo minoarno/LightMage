@@ -45,4 +45,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _maxFireBallAmount: 2
-  _fireBallPrefab: {fileID: 0}
+  _fireBallPrefab: {fileID: 8977788982038790276}

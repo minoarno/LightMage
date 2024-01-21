@@ -17,23 +17,15 @@ public class PlayerAttack : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Vector3 blah = new Vector3(Input.mousePosition.x, Input.mousePosition.y, _camera.nearClipPlane);
-        mousePosition = _camera.ScreenToWorldPoint(blah);
+        Vector3 mouseInput = new Vector3(Input.mousePosition.x, Input.mousePosition.y, _camera.nearClipPlane);
+        mousePosition = _camera.ScreenToWorldPoint(mouseInput);
         //Debug.Log("Screen to world pos " + mousePosition);
 
         if (!Input.GetMouseButtonDown(0))
             return;
 
 
-        if (!Physics2D.Raycast(mousePosition, Vector2.zero))
-            return;
-
-        Debug.Log("Hit something");
-
-        if (hit.collider == null)
-            return;
-
-        Debug.Log("Object hit: " + hit.collider.gameObject.name);
+        _fireBallManager.SpawnFireBall(_attackPosition.position, mousePosition);
     }
 
     private void OnDrawGizmos()

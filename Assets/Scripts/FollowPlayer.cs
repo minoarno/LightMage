@@ -1,14 +1,22 @@
 using UnityEngine;
 using static UnityEditor.Experimental.GraphView.GraphView;
+using static UnityEngine.GraphicsBuffer;
 
 public class FollowPlayer : MonoBehaviour
 {
-    [SerializeField] GameObject _player;
-    [SerializeField] private float _cameraDepthDistance = -15f;
-    // Update is called once per frame
-    void Update()
+    [SerializeField] Transform _player;
+
+    public Vector3 offset = new Vector3(0, 2, -10);
+    public float smoothTime = 0.25f;
+    Vector3 currentVelocity;
+
+    private void LateUpdate()
     {
-        Vector3 currentPos = new Vector3(_player.transform.position.x, _player.transform.position.y, _cameraDepthDistance);
-        transform.position = currentPos;
+        transform.position = Vector3.SmoothDamp(
+            transform.position,
+            _player.position + offset,
+            ref currentVelocity,
+            smoothTime
+            );
     }
 }
