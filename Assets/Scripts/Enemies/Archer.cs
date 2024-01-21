@@ -46,7 +46,7 @@ public class Archer : MonoBehaviour, IEnemy
         if (Vector3.Distance(transform.position, playerPos) > _stats.awakeDistance)
             return;
 
-        _shootCooldown -= _stats.maxShootCooldown;
+        _shootCooldown = 0;
 
         _shootRaycastDir = playerPos - transform.position;
 

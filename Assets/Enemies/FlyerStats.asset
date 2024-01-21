@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 046f4fbaac2be164480c187ed5f22a1d, type: 3}
   m_Name: FlyerStats
   m_EditorClassIdentifier: 
-  moveSpeed: 600
+  moveSpeed: 750
   distanceTreshold: 0.5
-  divebombChance: 0.2
-  minDivebombDelay: 5
+  divebombChance: 0.4
+  minDivebombDelay: 3
   maxHealth: 5
   damage: 2

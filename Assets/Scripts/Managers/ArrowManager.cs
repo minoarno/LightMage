@@ -65,8 +65,12 @@ public class ArrowManager : MonoBehaviour
         }
 
         if(go != null)
+        {
             go.transform.position = target;
-        
+            go.GetComponent<CapsuleCollider2D>().enabled = false;
+        }
+
+
         yield return new WaitForSeconds(1.0f);
 
         Destroy(go);
