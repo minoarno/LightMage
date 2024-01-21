@@ -16,3 +16,5 @@ MonoBehaviour:
   distanceTreshold: 0.5
   divebombChance: 0.2
   minDivebombDelay: 5
+  maxHealth: 5
+  damage: 2

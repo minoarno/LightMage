@@ -13,12 +13,12 @@ public class Archer : MonoBehaviour, IEnemy
     [SerializeField]
     private ArcherStats _stats;
 
-
+    int _currentHealth;
 
     // Start is called before the first frame update
     void Start()
     {
-
+        _currentHealth = _stats.maxHealth;
     }
 
     // Update is called once per frame
@@ -97,10 +97,11 @@ public class Archer : MonoBehaviour, IEnemy
         if (damage == 0)
             return;
 
-        _stats.maxHealth -= damage;
+        _currentHealth -= damage;
 
-        if (_stats.maxHealth >= 0)
+        if (_currentHealth > 0)
             return;
+
         Destroy(gameObject);
     }
 }
