@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Net;
 using UnityEngine;
 using UnityEngine.Pool;
 using UnityEngine.UIElements;
@@ -25,7 +26,12 @@ public class ArrowManager : MonoBehaviour
         DontDestroyOnLoad(instance);
     }
 
-    public IEnumerator ShootArrow(Vector3 start, Vector3 apex, Vector3 target)
+    public void StartShootArrow(Vector3 start, Vector3 apex, Vector3 target)
+    {
+        StartCoroutine(ShootArrow(start, apex, target));
+    }
+
+    private IEnumerator ShootArrow(Vector3 start, Vector3 apex, Vector3 target)
     {
         GameObject go = Instantiate(_arrowPrefab);
         Vector3 previousPos = start;
@@ -36,7 +42,6 @@ public class ArrowManager : MonoBehaviour
             {
                 Destroy(go);
                 yield break;
-
             }
 
             distanceTraveled += Time.deltaTime;
