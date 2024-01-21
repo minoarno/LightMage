@@ -29,6 +29,7 @@ public class Flyer : MonoBehaviour, IEnemy
 
     private LayerMask _toHitLayerMask;
 
+    private int _currentHealth;
 
 
     // Start is called before the first frame update
@@ -40,6 +41,7 @@ public class Flyer : MonoBehaviour, IEnemy
             return;
         }
 
+        _currentHealth = _stats.maxHealth;
 
         _rigidbody = GetComponent<Rigidbody2D>();
 
@@ -166,9 +168,9 @@ public class Flyer : MonoBehaviour, IEnemy
         if (damage == 0)
             return;
 
-        _stats.maxHealth -= damage;
+        _currentHealth -= damage;
 
-        if (_stats.maxHealth >= 0)
+        if (_currentHealth > 0)
             return;
 
         Destroy(gameObject);

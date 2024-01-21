@@ -14,4 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxDamage: 1
   maxHealth: 4
-  moveSpeed: 27
+  moveSpeed: 2
+  maxWayPointDistance: 0.5

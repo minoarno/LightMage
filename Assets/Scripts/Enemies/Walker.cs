@@ -5,7 +5,6 @@ using UnityEngine;
 [RequireComponent(typeof(BoxCollider2D))]
 public class Walker : MonoBehaviour, IEnemy
 {
-
     [SerializeField]
     private WalkerStats _stats;
 
@@ -30,12 +29,13 @@ public class Walker : MonoBehaviour, IEnemy
 
     private float _walkerWidthHalved;
 
+    private int _currentHealth;
 
     // Start is called before the first frame update
     void Start()
     {
         _rigidbody = GetComponent<Rigidbody2D>();
-
+        _currentHealth = _stats.maxHealth;
         if (!_pointA || !_pointB)
             return;
 
@@ -67,13 +67,13 @@ public class Walker : MonoBehaviour, IEnemy
 
         _rigidbody.velocity = new Vector2(_stats.moveSpeed * _moveSign, 0);
 
-        if (Math.Abs(transform.position.x - _currentPoint.position.x) < _walkerWidthHalved && _currentPoint == _pointA)
+        if (Math.Abs(transform.position.x - _currentPoint.position.x) <  _stats.maxWayPointDistance && _currentPoint == _pointA)
         {
             _currentPoint = _pointB;
             _moveSign *= -1;
         }
 
-        if (Math.Abs(transform.position.x - _currentPoint.position.x) < _walkerWidthHalved && _currentPoint == _pointB)
+        if (Math.Abs(transform.position.x - _currentPoint.position.x) < _stats.maxWayPointDistance && _currentPoint == _pointB)
         {
             _currentPoint = _pointA;
             _moveSign *= -1;
@@ -99,9 +99,9 @@ public class Walker : MonoBehaviour, IEnemy
         if (damage == 0)
             return;
 
-        _stats.maxHealth -= damage;
+        _currentHealth -= damage;
 
-        if (_stats.maxHealth <= 0)
+        if (_currentHealth >= 0)
             return;
 
         Destroy(gameObject);
