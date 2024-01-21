@@ -105,12 +105,10 @@ public class CharacterController2D : MonoBehaviour
     public void SetParent(Transform newParent)
     {
         transform.parent = newParent;
-        m_Rigidbody2D.velocity = Vector2.zero;
     }
 
     public void ResetParent()
     {
         transform.parent = null;
-        m_Rigidbody2D.velocity = Vector2.zero;
     }
 }
