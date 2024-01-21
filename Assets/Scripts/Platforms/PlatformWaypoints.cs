@@ -10,6 +10,7 @@ public class PlatformWaypoints : MonoBehaviour
     private int _curWaypoint = 0;
 
 
+
     private void OnDrawGizmosSelected()
     {
         if (transform.childCount == 0)

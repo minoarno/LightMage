@@ -26,7 +26,7 @@ Transform:
   m_GameObject: {fileID: 3475390438877952469}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -1.101, y: -0.888, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -46,7 +46,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 705c3b1fe815f404e9073c06710703d1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  waypointSize: 0.24
+  waypointSize: 0.08
 --- !u!1 &4172716140847743482
 GameObject:
   m_ObjectHideFlags: 0
@@ -136,7 +136,7 @@ Transform:
   m_GameObject: {fileID: 6487591878424686352}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 1.477, y: -0.126, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -154,6 +154,7 @@ GameObject:
   - component: {fileID: 5868717004140411091}
   - component: {fileID: 1513365219982603083}
   - component: {fileID: 6877346827903186720}
+  - component: {fileID: 1319396754482939083}
   m_Layer: 6
   m_Name: Platform
   m_TagString: Untagged
@@ -300,3 +301,17 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 5.02, y: 3.04}
   m_EdgeRadius: 0
+--- !u!114 &1319396754482939083
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8311277496602857359}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a673c502a7c1105428a05b1d09da5f40, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _waypoints: {fileID: 3895780349196572112}
+  _stats: {fileID: 11400000, guid: 16df6d98860452d4aaeb5662ea21ba42, type: 2}
