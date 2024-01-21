@@ -205,7 +205,7 @@ Rigidbody2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3125075399822016482}
-  m_BodyType: 0
+  m_BodyType: 1
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
@@ -239,6 +239,7 @@ MonoBehaviour:
   _stats: {fileID: 11400000, guid: 2e7cf89844fb7684e83dbb2074e25301, type: 2}
   _pointA: {fileID: 98784201097405662}
   _pointB: {fileID: 8579445412754910753}
+  _spriteRender: {fileID: 857479920656148816}
 --- !u!1 &6223111466862935262
 GameObject:
   m_ObjectHideFlags: 0
