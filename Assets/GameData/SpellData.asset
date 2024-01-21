@@ -9,9 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3c991041e0c6bac40a1fbf254f631909, type: 3}
-  m_Name: PlayerData
+  m_Script: {fileID: 11500000, guid: 512575f66ba4e924ca14b12c8f782e59, type: 3}
+  m_Name: SpellData
   m_EditorClassIdentifier: 
-  currentHealth: 10
-  _movementSpeed: 750
-  _fireBallCooldown: 0.5
+  _fireBallSpeed: 10
+  _fireBallLifeTime: 5
+  _damage: 5

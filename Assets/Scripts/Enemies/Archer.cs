@@ -1,11 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
-using System.Net;
-using Unity.VisualScripting;
-using UnityEditor;
 using UnityEngine;
 
-public class Archer : MonoBehaviour
+public class Archer : MonoBehaviour, IEnemy
 {
 
     [SerializeField]
@@ -35,6 +30,7 @@ public class Archer : MonoBehaviour
             return;
 
         _shootCooldown -= _stats.maxShootCooldown;
+
 
         Vector3 playerPos = PlayerManager.instance.GetPlayerTransform().position;
         Vector3 midwayPoint, endPoint;
@@ -102,4 +98,15 @@ public class Archer : MonoBehaviour
         Gizmos.DrawLine(previousP, endPoint);
     }
 
+    void IEnemy.DoDamage(int damage)
+    {
+        if (damage == 0)
+            return;
+
+        _stats.maxHealth -= damage;
+
+        if (_stats.maxHealth >= 0)
+            return;
+        Destroy(gameObject);
+    }
 }

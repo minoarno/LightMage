@@ -1,6 +1,4 @@
 using UnityEngine;
-using static UnityEditor.Experimental.GraphView.GraphView;
-using static UnityEngine.GraphicsBuffer;
 
 public class FollowPlayer : MonoBehaviour
 {
@@ -12,6 +10,9 @@ public class FollowPlayer : MonoBehaviour
 
     private void LateUpdate()
     {
+        if (_player == null)
+            return;
+
         transform.position = Vector3.SmoothDamp(
             transform.position,
             _player.position + offset,

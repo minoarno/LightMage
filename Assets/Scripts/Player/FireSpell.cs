@@ -4,41 +4,48 @@ using UnityEngine;
 [RequireComponent (typeof(CircleCollider2D))]
 public class FireBall : MonoBehaviour
 {
-    [SerializeField] private float _fireBallSpeed = 5f;
-    [HideInInspector] public bool _isMarkForDelete = false;
+    [SerializeField] FireSpellData _spellData;
 
+    private float _currentFireBallLifeTime;
     private Rigidbody2D _rigidBody;
     private void Awake()
     {
         _rigidBody = GetComponent<Rigidbody2D>();
     }
 
+    private void Update()
+    {
+        _currentFireBallLifeTime += Time.deltaTime;
+
+        if(_currentFireBallLifeTime >= _spellData._fireBallLifeTime)
+            Destroy(gameObject);
+
+    }
+
     public void SetTargetPosition(Vector3 startPosition, Vector3 endPosition)
     {
-        Debug.Log("Fireball start position " + startPosition);
-
         Vector3 travelVector = (endPosition - startPosition).normalized;
-        Vector3 fireballVelocity = travelVector * _fireBallSpeed;
+        Vector3 fireballVelocity = travelVector * _spellData._fireBallSpeed;
         _rigidBody.velocity = fireballVelocity;
     }
 
-    private void OnDrawGizmos()
-    {
-        Gizmos.DrawLine(transform.position, transform.position + new Vector3(_rigidBody.velocity.x, _rigidBody.velocity.y, 0));
-    }
-
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject == null)
             return;
 
-        _isMarkForDelete = true;
+        Destroy(gameObject);
 
-        //Value 8 is the 9th layer, in this case that's an enemy
-        if (collision.gameObject.layer == 8)
-        {
-            //TO DO: Do Damage to the enemy
-        }
+        int bitshiftedMask = LayerMask.GetMask("Enemy") >> collision.collider.gameObject.layer;
+
+        if (bitshiftedMask != 1)
+            return;
+
+        //DO damage to enemy
+        IEnemy enemy = collision.gameObject.GetComponent(typeof(IEnemy)) as IEnemy;
+
+        if(enemy != null)
+            enemy.DoDamage(_spellData._damage);
     }
 
 }

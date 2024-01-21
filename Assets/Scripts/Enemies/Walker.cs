@@ -1,12 +1,9 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UIElements;
 
 [RequireComponent(typeof(Rigidbody2D))]
 [RequireComponent(typeof(BoxCollider2D))]
-public class Walker : MonoBehaviour
+public class Walker : MonoBehaviour, IEnemy
 {
 
     [SerializeField]
@@ -49,7 +46,7 @@ public class Walker : MonoBehaviour
 
     private void OnDrawGizmosSelected()
     {
-        
+
     }
 
     bool IsGrounded()
@@ -83,4 +80,31 @@ public class Walker : MonoBehaviour
         }
 
     }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision == null) return;
+
+        int bitshiftedMask = LayerMask.GetMask("Player") >> collision.collider.gameObject.layer;
+
+        if (bitshiftedMask != 1)
+            return;
+
+        PlayerHealth playerHealth = collision.gameObject.GetComponent<PlayerHealth>();
+        playerHealth.TakeDamage(_stats.maxDamage);
+    }
+
+    void IEnemy.DoDamage(int damage)
+    {
+        if (damage == 0)
+            return;
+
+        _stats.maxHealth -= damage;
+
+        if (_stats.maxHealth <= 0)
+            return;
+
+        Destroy(gameObject);
+    }
+
 }

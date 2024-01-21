@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 6563949877733705635}
   - component: {fileID: 6291661515797643608}
   - component: {fileID: 1070081723678107651}
+  - component: {fileID: 3548669221569439489}
   m_Layer: 7
   m_Name: MainCharacter
   m_TagString: Untagged
@@ -152,9 +153,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 554196e9044621e4aa429252f68a01c2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _fireBallManager: {fileID: 0}
   _attackPosition: {fileID: 4873376022766404425}
   _camera: {fileID: 0}
+  _fireBallPrefab: {fileID: 7203355203839301795, guid: 32f7d38bcb5cc374a87a40abe14bd13d, type: 3}
+  _playerData: {fileID: 11400000, guid: 4f719cb28f4f2fe40ba461c3d9bbe2ab, type: 2}
+--- !u!114 &3548669221569439489
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2319417110533947598}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 633d198e86d4dbd4aadf4b6cdcaf204b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _playerData: {fileID: 11400000, guid: 4f719cb28f4f2fe40ba461c3d9bbe2ab, type: 2}
 --- !u!1 &2856256702066894250
 GameObject:
   m_ObjectHideFlags: 0
@@ -180,7 +195,7 @@ Transform:
   m_GameObject: {fileID: 2856256702066894250}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -5.23, y: 8.64, z: -0.44668162}
+  m_LocalPosition: {x: 6.18, y: 8.64, z: -0.44668162}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children: []

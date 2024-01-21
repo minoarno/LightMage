@@ -1,16 +1,7 @@
-using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
-using UnityEditor.Build;
 using UnityEngine;
-using UnityEngine.AI;
-using static UnityEngine.GraphicsBuffer;
-
-
-
 
 [RequireComponent(typeof(Rigidbody2D))]
-public class Flyer : MonoBehaviour
+public class Flyer : MonoBehaviour, IEnemy
 {
     enum FlyerStates
     {
@@ -157,4 +148,29 @@ public class Flyer : MonoBehaviour
         Gizmos.DrawWireSphere(_diveBombTarget, 1);
     }
 
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision == null) return;
+
+        int bitshiftedMask = LayerMask.GetMask("Player") >> collision.collider.gameObject.layer;
+
+        if (bitshiftedMask != 1)
+            return;
+
+        PlayerHealth playerHealth = collision.gameObject.GetComponent<PlayerHealth>();
+        playerHealth.TakeDamage(_stats.damage);
+    }
+
+    void IEnemy.DoDamage(int damage)
+    {
+        if (damage == 0)
+            return;
+
+        _stats.maxHealth -= damage;
+
+        if (_stats.maxHealth >= 0)
+            return;
+
+        Destroy(gameObject);
+    }
 }
